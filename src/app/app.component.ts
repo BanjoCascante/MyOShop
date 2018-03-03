@@ -1,8 +1,8 @@
-import { AuthService } from './services/auth.service';
+import { AuthService } from './shared/services/auth.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { OnDestroy } from '@angular/core';
-import { UserService } from './services/user.service';
+import { UserService } from './shared/services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -14,8 +14,10 @@ export class AppComponent {
         let suscription = authService.user$.subscribe(user => {
             userService.save(user);
             let returnUrl = localStorage.getItem('returnUrl');
-            router.navigateByUrl(returnUrl);
+            if(returnUrl){
+                localStorage.removeItem('returnUrl');
+                router.navigateByUrl(returnUrl);
+            }
         })
     }
-
 }

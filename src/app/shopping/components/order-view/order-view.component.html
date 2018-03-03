@@ -1,0 +1,63 @@
+<ng-container *ngIf="order">
+    <h1>Order Details</h1>
+    <p> Order Placed: {{order.datePlaced | date:'shortDate'}} | Order #{{orderId}}</p>
+    <div class="row">
+        <div class="col-md-7">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                        </th>
+                        <th>Product</th>
+                        <th class="text-center" style="width:230px">Quantity</th>
+                        <th class="text-right">Total Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of order.items">
+                        <td>
+                            <img [src]="item.product.imageUrl" class="thumbnail" alt="">
+                        </td>
+                        <td>
+                            {{item.product.title}}
+                        </td>
+                        <td class="text-center">
+                            {{item.quantity}}
+                        </td>
+                        <td class="text-right">
+                            {{item.totalPrice | currency: 'USD': true}}
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td class="text-right">{{totalPriceOrder | currency: 'USD': true}}</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <div class="col-md-5">
+
+            <div class="card" style="width: 100%;">
+                <div class="card-block">
+                    <h4 class="card-title">Shipping Details</h4>
+                    <p class="card-text">{{order.shipping.name}}</p>
+                    <p class="card-text">{{order.shipping.addressLine1}} </p>
+                    <p *ngIf="order.shipping.addressLine2" class="card-text">{{order.shipping.addressLine2}} </p>
+                    
+                    <p class="card-text">{{order.shipping.city}}</p>
+                </div>
+
+                    <div class="card-footer">
+                            <p class="card-text">Order Total: {{totalPriceOrder | currency: 'USD': true}}</p>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+</ng-container>

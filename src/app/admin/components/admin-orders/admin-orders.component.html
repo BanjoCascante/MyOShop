@@ -1,0 +1,21 @@
+<ngx-datatable class='bootstrap' columnMode="force" rowHeight="50" [rows]="orders" [limit]="10" [footerHeight]="50" [headerHeight]="60">
+    <ngx-datatable-column headerClass="" name="Order" [sortable]="true" [resizeable]="true" prop="$key">
+    </ngx-datatable-column>
+
+    <ngx-datatable-column headerClass="" name="Client" [sortable]="true" [resizeable]="true" prop="shipping.name">
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="City" prop="shipping.city">
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Date" prop="datePlaced">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+            {{value | date}}
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="" prop="$key">
+        <ng-template let-value="value" ngx-datatable-cell-template >
+            <a [routerLink]="['/admin/orders/',value]"> View Order</a>
+        </ng-template>
+    </ngx-datatable-column>
+</ngx-datatable>
